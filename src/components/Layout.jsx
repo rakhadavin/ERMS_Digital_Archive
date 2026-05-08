@@ -19,12 +19,12 @@ const navItems = [
 ]
 
 const pageMeta = {
-  '/':            { title: 'Dashboard',             sub: 'Selamat datang di Sistem Arsip Digital' },
-  '/upload':      { title: 'Auto-Metadata',         sub: 'Upload dokumen dan ekstraksi metadata otomatis' },
-  '/notifikasi':  { title: 'Notifikasi Retensi',    sub: 'Dokumen yang mendekati batas masa retensi' },
-  '/dokumen':     { title: 'Daftar Dokumen',        sub: 'Semua dokumen tersimpan dalam arsip' },
-  '/kategori':    { title: 'Kosakata Kategori',     sub: 'Kelola kategori utama dan sub-kategori' },
-}
+  "/": { title: "Dashboard", sub: "Selamat datang di MetaLexicon" },
+  "/upload": { title: "Auto-Metadata", sub: "Upload dokumen dan ekstraksi metadata otomatis" },
+  "/notifikasi": { title: "Notifikasi Retensi", sub: "Dokumen yang mendekati batas masa retensi" },
+  "/dokumen": { title: "Daftar Dokumen", sub: "Semua dokumen tersimpan dalam arsip" },
+  "/kategori": { title: "Kosakata Kategori", sub: "Kelola kategori utama dan sub-kategori" },
+};
 
 export default function Layout({ children }) {
   const { pathname } = useLocation()
@@ -40,10 +40,8 @@ export default function Layout({ children }) {
           <div className="w-8 h-8 rounded-lg bg-brand-400 flex items-center justify-center mb-2">
             <Archive size={16} className="text-white" />
           </div>
-          <p className="text-sm font-bold leading-tight tracking-tight text-gray-900">
-            Sistem Arsip<br />Digital
-          </p>
-          <p className="text-[10px] text-gray-400 mt-0.5 font-mono tracking-wide">v0.1 · PROTOTYPE</p>
+          <p className="text-sm font-bold leading-tight tracking-tight text-gray-900">MetaLexicon</p>
+          <p className="text-[10px] text-gray-400 mt-0.5 font-mono tracking-wide">v0.1 · Metadata Solution</p>
         </div>
 
         {/* Nav */}
@@ -53,27 +51,18 @@ export default function Layout({ children }) {
             <NavLink
               key={to}
               to={to}
-              end={to === '/'}
+              end={to === "/"}
               className={({ isActive }) =>
                 `flex items-center gap-2.5 px-4 py-2.5 text-[13px] font-medium transition-all relative border-none
-                ${isActive
-                  ? 'bg-brand-50 text-brand-600 font-semibold'
-                  : 'text-gray-500 hover:bg-gray-50 hover:text-gray-800'
-                }`
+                ${isActive ? "bg-brand-50 text-brand-600 font-semibold" : "text-gray-500 hover:bg-gray-50 hover:text-gray-800"}`
               }
             >
               {({ isActive }) => (
                 <>
-                  {isActive && (
-                    <span className="absolute left-0 top-1 bottom-1 w-[3px] bg-brand-400 rounded-r-full" />
-                  )}
+                  {isActive && <span className="absolute left-0 top-1 bottom-1 w-[3px] bg-brand-400 rounded-r-full" />}
                   <Icon size={16} />
                   {label}
-                  {badge && notifCount > 0 && (
-                    <span className="ml-auto bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-[18px] text-center">
-                      {notifCount}
-                    </span>
-                  )}
+                  {badge && notifCount > 0 && <span className="ml-auto bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-[18px] text-center">{notifCount}</span>}
                 </>
               )}
             </NavLink>
@@ -96,29 +85,20 @@ export default function Layout({ children }) {
             <p className="text-xs text-gray-400">{meta.sub}</p>
           </div>
           <div className="flex items-center gap-2">
-            <NavLink
-              to="/notifikasi"
-              className="w-8 h-8 rounded-lg border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-gray-50 relative"
-            >
+            <NavLink to="/notifikasi" className="w-8 h-8 rounded-lg border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-gray-50 relative">
               <Bell size={15} />
-              {notifCount > 0 && (
-                <span className="absolute top-1 right-1 w-1.5 h-1.5 bg-red-500 rounded-full" />
-              )}
+              {notifCount > 0 && <span className="absolute top-1 right-1 w-1.5 h-1.5 bg-red-500 rounded-full" />}
             </NavLink>
             <button className="w-8 h-8 rounded-lg border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-gray-50">
               <Settings size={15} />
             </button>
-            <div className="w-8 h-8 rounded-full bg-brand-50 flex items-center justify-center text-xs font-bold text-brand-600">
-              A
-            </div>
+            <div className="w-8 h-8 rounded-full bg-brand-50 flex items-center justify-center text-xs font-bold text-brand-600">A</div>
           </div>
         </header>
 
         {/* Page content */}
-        <main className="flex-1 overflow-y-auto">
-          {children}
-        </main>
+        <main className="flex-1 overflow-y-auto">{children}</main>
       </div>
     </div>
-  )
+  );
 }
