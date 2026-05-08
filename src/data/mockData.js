@@ -44,17 +44,18 @@ export const mockNotifikasiRetensi = [
 // ─── Mock Data: OCR Extraction Result ────────────────────────────────────────
 
 export const mockOCRResult = {
-  title: 'Surat Keputusan Direktur No. 017',
-  nomor_dokumen: '017/SDM.02/VII/2024',
-  tanggal_dokumen: '2024-07-15',
-  unit_pengolah: 'Divisi SDM',
-  sifat_dokumen: 'Biasa',
-  tentang: 'Penetapan Tim Evaluasi Kinerja Semester I Tahun 2024',
-  description: 'Surat keputusan ini menetapkan susunan tim evaluasi kinerja pegawai untuk periode semester pertama tahun anggaran 2024.',
-  konteks: 'Evaluasi dilakukan berdasarkan KPI yang telah ditetapkan pada rapat kerja bulan Januari 2024.',
-  code_SC: 'SDM.02',
-  mc: 'SDM',
-  sc_name: 'Evaluasi Kinerja',
+  title: "Surat Keputusan Direktur No. 017",
+  nomor_dokumen: "017/SDM.02/VII/2024",
+  tanggal_dokumen: "2024-07-15",
+  unit_pengolah: "Divisi SDM",
+  sifat_dokumen: "Biasa",
+  tentang: "Penetapan Tim Evaluasi Kinerja Semester I Tahun 2024",
+  description: "Surat keputusan ini menetapkan susunan tim evaluasi kinerja pegawai untuk periode semester pertama tahun anggaran 2024.",
+  konteks: "Evaluasi dilakukan berdasarkan KPI yang telah ditetapkan pada rapat kerja bulan Januari 2024.",
+  code_SC: "SDM.02",
+  mc: "SDM",
+  status: "Aktif",
+  sc_name: "Evaluasi Kinerja",
   retention: 3,
   tahun_retensi: 2027,
   confidence: {
@@ -67,4 +68,4 @@ export const mockOCRResult = {
     description: 75,
     konteks: 70,
   },
-}
+};

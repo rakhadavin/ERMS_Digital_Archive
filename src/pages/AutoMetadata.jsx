@@ -175,11 +175,7 @@ function PhaseReview({ fileName, formData, setFormData, onSave, onReset, error }
       </div>
 
       {/* Error Message */}
-      {error && (
-        <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
-          {error}
-        </div>
-      )}
+      {error && <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">{error}</div>}
 
       {/* Informasi Dokumen */}
       <div className="card mb-4">
@@ -201,12 +197,8 @@ function PhaseReview({ fileName, formData, setFormData, onSave, onReset, error }
             <AutoInput field="unit_pengolah" conf={c.unit} />
           </FormField>
           <FormField label="Sifat Dokumen" conf={c.sifat}>
-            <select
-              className="form-input auto-filled"
-              value={formData.sifat_dokumen ?? ''}
-              onChange={(e) => setFormData({ ...formData, sifat_dokumen: e.target.value })}
-            >
-              {['Biasa', 'Terbatas', 'Rahasia', 'Terbuka'].map((v) => (
+            <select className="form-input auto-filled" value={formData.sifat_dokumen ?? ""} onChange={(e) => setFormData({ ...formData, sifat_dokumen: e.target.value })}>
+              {["Biasa", "Terbatas", "Rahasia", "Terbuka"].map((v) => (
                 <option key={v}>{v}</option>
               ))}
             </select>
@@ -218,12 +210,7 @@ function PhaseReview({ fileName, formData, setFormData, onSave, onReset, error }
             <AutoInput field="description" conf={c.description} />
           </FormField>
           <FormField label="Konteks" conf={c.konteks} full>
-            <textarea
-              className="form-input auto-filled resize-y"
-              rows={2}
-              value={formData.konteks ?? ''}
-              onChange={(e) => setFormData({ ...formData, konteks: e.target.value })}
-            />
+            <textarea className="form-input auto-filled resize-y" rows={2} value={formData.konteks ?? ""} onChange={(e) => setFormData({ ...formData, konteks: e.target.value })} />
           </FormField>
         </div>
       </div>
@@ -235,21 +222,28 @@ function PhaseReview({ fileName, formData, setFormData, onSave, onReset, error }
           <span className="badge badge-blue ml-auto">Dari kode: {formData.code_SC}</span>
         </div>
         <div className="grid grid-cols-2 gap-3.5">
-          <FormField label="Kode Sub-Kategori"><ReadOnly field="code_SC" /></FormField>
-          <FormField label="Sub-Kategori"><ReadOnly field="sc_name" /></FormField>
-          <FormField label="Kategori Utama"><ReadOnly field="mc" /></FormField>
+          <FormField label="Kode Sub-Kategori">
+            <ReadOnly field="code_SC" />
+          </FormField>
+          <FormField label="Sub-Kategori">
+            <ReadOnly field="sc_name" />
+          </FormField>
+          <FormField label="Kategori Utama">
+            <ReadOnly field="mc" />
+          </FormField>
           <FormField label="Masa Retensi">
-            <div className="form-input readonly flex items-center min-h-[38px]">
-              {formData.retention} Tahun
-            </div>
+            <div className="form-input readonly flex items-center min-h-[38px]">{formData.retention} Tahun</div>
           </FormField>
           <FormField label="Tahun Retensi">
             <ReadOnly field="tahun_retensi" highlight />
           </FormField>
+          <FormField label="Status">
+            <ReadOnly field="status" highlight />
+          </FormField>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 // ─── Success Phase ────────────────────────────────────────────────────────────
@@ -331,15 +325,18 @@ export default function AutoMetadata() {
       // Combine metadata with classification
       const processedData = {
         ...metadata,
-        ...(classification?.success ? {
-          code_SC: classification.data.code_SC,
-          sc_name: classification.data.name_SC,
-          code_MC: classification.data.code_MC,
-          retention: classification.data.retention,
-          tahun_retensi: metadata.tanggal_dokumen ?
-            calculateRetentionYear(metadata.tanggal_dokumen, classification.data.retention) : null
-        } : {})
-      }
+        status: "ACTIVE",
+        ...(classification?.success
+          ? {
+              code_SC: classification.data.code_SC,
+              sc_name: classification.data.name_SC,
+              code_MC: classification.data.code_MC,
+              status: classification.data.status ?? "ACTIVE",
+              retention: classification.data.retention,
+              tahun_retensi: metadata.tanggal_dokumen ? calculateRetentionYear(metadata.tanggal_dokumen, classification.data.retention) : null,
+            }
+          : {}),
+      };
 
       setFormData(processedData)
       setPhase('review')
@@ -385,8 +382,9 @@ export default function AutoMetadata() {
         mc: formData.code_MC,
         sc: formData.code_SC,
         retensi: formData.tahun_retensi,
-        file_type: file?.name.split('.').pop().toUpperCase()
-      })
+        status: formData.status,
+        file_type: file?.name.split(".").pop().toUpperCase(),
+      });
 
       setPhase('saved')
     } catch (err) {
