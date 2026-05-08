@@ -17,6 +17,13 @@ const OCR_STEPS = [
   'Mencari kode klasifikasi',
 ]
 
+const ACCESS_GROUPS = [
+  { code: "E", label: "Executive Access", level: "L7–L9" },
+  { code: "R", label: "Regulatory Access", level: "L5–L6" },
+  { code: "M", label: "Managerial Access", level: "L4" },
+  { code: "S", label: "Staff Access", level: "L1–L3" },
+];
+
 // ─── Upload Phase ─────────────────────────────────────────────────────────────
 function PhaseUpload({ onStart }) {
   const [drag, setDrag] = useState(false)
@@ -240,6 +247,16 @@ function PhaseReview({ fileName, formData, setFormData, onSave, onReset, error }
           <FormField label="Status">
             <ReadOnly field="status" highlight />
           </FormField>
+          <FormField label="Hak Akses">
+            <select className="form-input" value={formData.hak_akses ?? ""} onChange={(e) => setFormData({ ...formData, hak_akses: e.target.value })}>
+              <option value="">Pilih hak akses</option>
+              {ACCESS_GROUPS.map((group) => (
+                <option key={group.code} value={group.code}>
+                  {group.code} — {group.label} ({group.level})
+                </option>
+              ))}
+            </select>
+          </FormField>
         </div>
       </div>
     </div>
@@ -254,17 +271,16 @@ function PhaseSaved({ formData, onReset }) {
         <CheckCircle2 size={36} className="text-brand-400" />
       </div>
       <p className="text-lg font-bold text-gray-900">Metadata Tersimpan!</p>
-      <p className="text-sm text-gray-500 mt-1.5">
-        Dokumen berhasil diklasifikasikan dan disimpan ke arsip.
-      </p>
+      <p className="text-sm text-gray-500 mt-1.5">Dokumen berhasil diklasifikasikan dan disimpan ke arsip.</p>
       <div className="card mt-5 text-left text-sm">
         <p className="text-xs text-gray-400 mb-2">Ringkasan:</p>
         {[
-          ['Judul', formData.title],
-          ['Nomor', formData.nomor_dokumen],
-          ['Unit', formData.unit_pengolah],
-          ['Sub-Kategori', `${formData.code_SC} — ${formData.sc_name}`],
-          ['Tahun Retensi', formData.tahun_retensi],
+          ["Judul", formData.title],
+          ["Nomor", formData.nomor_dokumen],
+          ["Unit", formData.unit_pengolah],
+          ["Sub-Kategori", `${formData.code_SC} — ${formData.sc_name}`],
+          ["Hak Akses", formData.hak_akses],
+          ["Tahun Retensi", formData.tahun_retensi],
         ].map(([k, v]) => (
           <div key={k} className="flex gap-2 py-1.5 border-b border-gray-50 last:border-0">
             <span className="text-gray-400 w-28 shrink-0">{k}</span>
@@ -277,7 +293,7 @@ function PhaseSaved({ formData, onReset }) {
         Upload Dokumen Lain
       </button>
     </div>
-  )
+  );
 }
 
 // ─── Main Page ────────────────────────────────────────────────────────────────
@@ -384,6 +400,7 @@ export default function AutoMetadata() {
         retensi: formData.tahun_retensi,
         status: formData.status,
         file_type: file?.name.split(".").pop().toUpperCase(),
+        hak_akses: formData.hak_akses,
       });
 
       setPhase('saved')
