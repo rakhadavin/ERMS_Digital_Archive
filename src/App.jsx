@@ -3,6 +3,7 @@ import Layout from './components/Layout.jsx'
 import Dashboard from './pages/Dashboard.jsx'
 import AutoMetadata from './pages/AutoMetadata.jsx'
 import Notifikasi from './pages/Notifikasi.jsx'
+import DaftarKategori from "./pages/DaftarKategori.jsx";
 
 // Placeholder — akan diganti satu per satu sesuai urutan pengerjaan
 function ComingSoon({ nama }) {
@@ -41,15 +42,15 @@ export default function App() {
       <Layout>
         <Routes>
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
-          <Route path="/dashboard"  element={<Dashboard />} />
-          <Route path="/upload"     element={<AutoMetadata />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/upload" element={<AutoMetadata />} />
           <Route path="/notifikasi" element={<Notifikasi />} />
-          <Route path="/dokumen"    element={<ComingSoon nama="Daftar Dokumen" />} />
-          <Route path="/dokumen/:id"element={<ComingSoon nama="Detail Dokumen" />} />
-          <Route path="/kategori"   element={<ComingSoon nama="Kosakata Kategori" />} />
-          <Route path="*"           element={<Navigate to="/dashboard" replace />} />
+          <Route path="/dokumen" element={<ComingSoon nama="Daftar Dokumen" />} />
+          <Route path="/dokumen/:id" element={<ComingSoon nama="Detail Dokumen" />} />
+          <Route path="/kategori" element={<DaftarKategori />} />
+          <Route path="*" element={<Navigate to="/dashboard" replace />} />
         </Routes>
       </Layout>
     </BrowserRouter>
-  )
+  );
 }
