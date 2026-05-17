@@ -9,6 +9,7 @@ import {
   Settings,
 } from 'lucide-react'
 import { mockNotifikasiRetensi } from '../data/mockData.js'
+import Chatbot from './Chatbot.jsx'
 
 const navItems = [
   { to: '/',           icon: LayoutDashboard, label: 'Dashboard' },
@@ -99,6 +100,8 @@ export default function Layout({ children }) {
         {/* Page content */}
         <main className="flex-1 overflow-y-auto">{children}</main>
       </div>
+
+      <Chatbot />
     </div>
   );
 }
