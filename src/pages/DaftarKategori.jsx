@@ -7,9 +7,8 @@
 
 import { useState } from 'react'
 import {
-  mainCategories as initialMain,
-  subCategories as initialSub,
-  getSubByMC,
+  mockKategoriUtama as initialMain,
+  mockSubKategori as initialSub,
 } from '../data/mockKategori'
 
 // ─── shadcn/ui primitives (pastikan sudah di-install) ─────────────────────────
@@ -623,7 +622,10 @@ function PanelDokumenTerkait({ filterMC, filterSC, onClose }) {
                     <Eye className="h-3.5 w-3.5" />
                     Baca
                   </Button>
-                  {isNearExpiry(selectedDoc.tahun_retensi) && (
+                  {(() => {
+                    const sc = subCats.find(s => s.code_SC === selectedDoc.code_SC)
+                    return sc && sc.masa_retensi_aktif === null && sc.masa_retensi_inaktif === null && sc.keterangan === null
+                  })() && (
                     <>
                       <Button
                         size="sm"

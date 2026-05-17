@@ -3,7 +3,7 @@
  * Central export — import semua mock data dari satu tempat
  *
  * Penggunaan:
- *   import { mockDokumen, mainCategories, mockOcrResult } from '@/data'
+ *   import { mockDokumen, mockKategoriUtama, mockSubKategori } from '@/data'
  */
 
 export * from './mockDokumen'
