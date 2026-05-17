@@ -269,6 +269,29 @@ export const mockDokumen = [
     action_taken_by: null,
     document_status: "ACTIVE",
   },
+  // ── Simulation: SC belum lengkap (retensi inaktif & keterangan null) → tombol Pertahankan/Musnahkan muncul ──
+  {
+    id: "d-015",
+    unit_pengolah: "Departemen Moneter",
+    nomor_dokumen: "005/MR.03.02/III/2025",
+    tanggal_dokumen: "2025-03-01",
+    tahun_retensi_aktif: 2028, // 2025 + 3 (dari masa_retensi_aktif)
+    tahun_retensi_inaktif: null, // belum bisa dihitung karena masa_retensi_inaktif SC masih null
+    sifat_dokumen: "Biasa",
+    code_SC: "MR.03.02",
+    code_MC: "MR",
+    title: "Laporan Bulanan Posisi Cadangan Devisa Maret 2025",
+    description: "Laporan posisi cadangan devisa Bank Indonesia bulan Maret 2025 beserta analisis komposisi aset cadangan.",
+    tentang: "Posisi dan Komposisi Cadangan Devisa BI per Maret 2025",
+    konteks: "Diterbitkan rutin setiap bulan oleh Departemen Moneter sebagai bagian dari pelaporan internal.",
+    file_path: "/mock/dokumen/MR0302-005-2025.pdf",
+    file_type: "PDF",
+    created_at: "2025-03-05T09:00:00Z",
+    action_taken: null,
+    action_taken_at: null,
+    action_taken_by: null,
+    document_status: "ACTIVE",
+  },
   // ── Simulation: action Musnahkan already taken ────────────────────────────
   {
     id: "d-013",

@@ -1,6 +1,7 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { mockSubKategori } from "../data/mockKategori";
 import { mockDokumen } from "../data/mockDokumen";
 
@@ -108,8 +109,14 @@ function StatusBadge({ expiring }) {
 // ─── Main Component ───────────────────────────────────────────────────────────
 
 export default function DaftarDokumenPage() {
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchParams] = useSearchParams();
+  const [searchQuery, setSearchQuery] = useState(() => searchParams.get('q') ?? "");
   const [advancedField, setAdvancedField] = useState(null);
+
+  useEffect(() => {
+    const q = searchParams.get('q');
+    if (q) setSearchQuery(q);
+  }, [searchParams]);
   const [filterTahun, setFilterTahun] = useState("");
   const [filterSifat, setFilterSifat] = useState("");
   const [filterMC, setFilterMC] = useState("");
@@ -449,7 +456,7 @@ export default function DaftarDokumenPage() {
                   {filteredDocs.map((doc, i) => {
                     const expiring = isExpiringSoon(doc.tahun_retensi_aktif);
                     const sc = mockSubKategori.find((s) => s.code_SC === doc.code_SC);
-                    const canTakeAction = sc && sc.masa_retensi_aktif === null && sc.masa_retensi_inaktif === null && sc.keterangan === null;
+                    const canTakeAction = sc && (sc.masa_retensi_aktif === null || sc.masa_retensi_inaktif === null || sc.keterangan === null);
                     return (
                       <tr
                         key={doc.id}

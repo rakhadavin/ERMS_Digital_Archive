@@ -9,6 +9,7 @@ import { extractMetadata } from '../utils/metadataExtractor.js'
 import { classifyDocument } from '../utils/classification.js'
 import { calculateRetentionYear } from '../utils/retention.js'
 import { ConfidenceBar, FormField } from '../components/ui.jsx'
+import { mockKategoriUtama, mockSubKategori } from '../data/mockKategori.js'
 
 const OCR_STEPS = [
   'Mengunggah file',
@@ -60,10 +61,14 @@ async function runOcrPipeline(doc, updateDoc) {
           code_SC: result.data.code_SC,
           sc_name: result.data.name_SC,
           code_MC: result.data.code_MC,
-          status: result.data.status ?? 'ACTIVE',
-          retention: result.data.retention,
-          tahun_retensi: metadata.tanggal_dokumen
-            ? calculateRetentionYear(metadata.tanggal_dokumen, result.data.retention)
+          masa_retensi_aktif: result.data.masa_retensi_aktif,
+          masa_retensi_inaktif: result.data.masa_retensi_inaktif,
+          keterangan: result.data.keterangan,
+          tahun_retensi_aktif: metadata.tanggal_dokumen && result.data.masa_retensi_aktif != null
+            ? calculateRetentionYear(metadata.tanggal_dokumen, result.data.masa_retensi_aktif)
+            : null,
+          tahun_retensi_inaktif: metadata.tanggal_dokumen && result.data.masa_retensi_aktif != null && result.data.masa_retensi_inaktif != null
+            ? calculateRetentionYear(metadata.tanggal_dokumen, result.data.masa_retensi_aktif + result.data.masa_retensi_inaktif)
             : null,
         }
       } else {
@@ -371,11 +376,20 @@ function DocReviewCard({ doc, onUpdate, isSaved }) {
           <div className="grid grid-cols-2 gap-3">
             <FormField label="Kode Sub-Kategori"><ReadOnly field="code_SC" /></FormField>
             <FormField label="Sub-Kategori"><ReadOnly field="sc_name" /></FormField>
-            <FormField label="Kategori Utama"><ReadOnly field="mc" /></FormField>
-            <FormField label="Masa Retensi">
-              <div className="form-input readonly flex items-center min-h-[38px]">{doc.formData.retention} Tahun</div>
+            <FormField label="Kategori Utama"><ReadOnly field="code_MC" /></FormField>
+            <FormField label="Keterangan"><ReadOnly field="keterangan" /></FormField>
+            <FormField label="Retensi Aktif">
+              <div className="form-input readonly flex items-center min-h-[38px]">
+                {doc.formData.masa_retensi_aktif != null ? `${doc.formData.masa_retensi_aktif} Tahun` : '—'}
+              </div>
             </FormField>
-            <FormField label="Tahun Retensi"><ReadOnly field="tahun_retensi" highlight /></FormField>
+            <FormField label="Retensi Inaktif">
+              <div className="form-input readonly flex items-center min-h-[38px]">
+                {doc.formData.masa_retensi_inaktif != null ? `${doc.formData.masa_retensi_inaktif} Tahun` : '—'}
+              </div>
+            </FormField>
+            <FormField label="Tahun Retensi Aktif"><ReadOnly field="tahun_retensi_aktif" highlight /></FormField>
+            <FormField label="Tahun Retensi Inaktif"><ReadOnly field="tahun_retensi_inaktif" highlight /></FormField>
             <FormField label="Status"><ReadOnly field="status" highlight /></FormField>
             <FormField label="Hak Akses">
               <select
@@ -558,7 +572,11 @@ export default function AutoMetadata() {
           konteks: doc.formData.konteks,
           mc: doc.formData.code_MC,
           sc: doc.formData.code_SC,
-          retensi: doc.formData.tahun_retensi,
+          tahun_retensi_aktif: doc.formData.tahun_retensi_aktif,
+          tahun_retensi_inaktif: doc.formData.tahun_retensi_inaktif,
+          masa_retensi_aktif: doc.formData.masa_retensi_aktif,
+          masa_retensi_inaktif: doc.formData.masa_retensi_inaktif,
+          keterangan: doc.formData.keterangan,
           status: doc.formData.status,
           file_type: doc.file?.name.split('.').pop().toUpperCase(),
           hak_akses: doc.formData.hak_akses,

@@ -1,5 +1,6 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Files, AlertTriangle, Folders, Clock, Upload, FolderPlus } from 'lucide-react'
+import { Files, AlertTriangle, Folders, Clock, Upload, FolderPlus, Search } from 'lucide-react'
 import { mockDokumen, mockNotifikasiRetensi } from '../data/mockData.js'
 import { Badge, sifatVariant } from '../components/ui.jsx'
 
@@ -45,9 +46,39 @@ const stats = [
 export default function Dashboard() {
   const navigate = useNavigate()
   const kritis = mockNotifikasiRetensi.filter((n) => !n.tindakan)
+  const [query, setQuery] = useState('')
+
+  function handleSearch(e) {
+    e.preventDefault()
+    const q = query.trim()
+    navigate(q ? `/dokumen?q=${encodeURIComponent(q)}` : '/dokumen')
+  }
 
   return (
     <div className="p-7">
+      {/* Search Bar */}
+      <form onSubmit={handleSearch} className="mb-6">
+        <div className="relative">
+          <Search
+            size={16}
+            className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
+          />
+          <input
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Cari dokumen berdasarkan kategori utama…"
+            className="w-full pl-10 pr-28 py-2.5 text-sm border border-gray-200 rounded-xl bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500/30 focus:border-green-400 placeholder-gray-400 text-gray-800"
+          />
+          <button
+            type="submit"
+            className="absolute right-2 top-1/2 -translate-y-1/2 btn btn-primary btn-sm"
+          >
+            Cari Dokumen
+          </button>
+        </div>
+      </form>
+
       {/* Stat Cards */}
       <div className="grid grid-cols-4 gap-3.5 mb-6">
         {stats.map((s, i) => (

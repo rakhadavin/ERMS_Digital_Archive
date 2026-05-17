@@ -21,6 +21,8 @@ export const mockSubKategori = [
   { code_MC: "MR", code_SC: "MR.03", name_SC: "Pengelolaan Cadangan Devisa", desc_SC: null, masa_retensi_aktif: null, masa_retensi_inaktif: null, keterangan: null },
   { code_MC: "MR", code_SC: "MR.03.01", name_SC: "Kebijakan Cadangan Devisa", desc_SC: null, masa_retensi_aktif: null, masa_retensi_inaktif: null, keterangan: null },
   { code_MC: "MR", code_SC: "MR.03.01.01", name_SC: "Kebijakan Pengelolaan Cadangan Devisa", desc_SC: null, masa_retensi_aktif: 5, masa_retensi_inaktif: 25, keterangan: "Simpan Permanen" },
+  // ── Simulation: SC dengan retensi inaktif & keterangan belum diisi ──────────
+  { code_MC: "MR", code_SC: "MR.03.02", name_SC: "Laporan Posisi Cadangan Devisa", desc_SC: null, masa_retensi_aktif: 3, masa_retensi_inaktif: null, keterangan: null },
 
   // ── MP — Makroprudensial ───────────────────────────────────────────────────
   { code_MC: "MP", code_SC: "MP.01", name_SC: "Kebijakan Makroprudensial", desc_SC: null, masa_retensi_aktif: null, masa_retensi_inaktif: null, keterangan: null },

@@ -21,6 +21,8 @@ export const mockSubKategori = [
   { code_MC: "MR", code_SC: "MR.03", name_SC: "Pengelolaan Cadangan Devisa", desc_SC: null, masa_retensi_aktif: null, masa_retensi_inaktif: null, keterangan: null },
   { code_MC: "MR", code_SC: "MR.03.01", name_SC: "Kebijakan Cadangan Devisa", desc_SC: null, masa_retensi_aktif: null, masa_retensi_inaktif: null, keterangan: null },
   { code_MC: "MR", code_SC: "MR.03.01.01", name_SC: "Kebijakan Pengelolaan Cadangan Devisa", desc_SC: null, masa_retensi_aktif: 5, masa_retensi_inaktif: 25, keterangan: "Simpan Permanen" },
+  // ── Simulation: SC dengan retensi inaktif & keterangan belum diisi ──────────
+  { code_MC: "MR", code_SC: "MR.03.02", name_SC: "Laporan Posisi Cadangan Devisa", desc_SC: null, masa_retensi_aktif: 3, masa_retensi_inaktif: null, keterangan: null },
 
   // ── MP — Makroprudensial ──────────────────────────────────────────────────
   { code_MC: "MP", code_SC: "MP.01", name_SC: "Kebijakan Makroprudensial", desc_SC: null, masa_retensi_aktif: null, masa_retensi_inaktif: null, keterangan: null },
@@ -215,6 +217,19 @@ export const mockDokumen = [
     sifat: "Terbuka",
     file_type: "PDF",
   },
+  // ── Simulation: SC belum lengkap (retensi inaktif & keterangan null) ────────
+  {
+    id: "d-015",
+    title: "Laporan Bulanan Posisi Cadangan Devisa Maret 2025",
+    nomor: "005/MR.03.02/III/2025",
+    unit: "Departemen Moneter",
+    tanggal: "2025-03-01",
+    mc: "MR",
+    sc: "MR.03.02",
+    retensi: 2028, // hanya retensi aktif — inaktif belum bisa dihitung (SC null)
+    sifat: "Biasa",
+    file_type: "PDF",
+  },
 ];
 
 // ─── Mock Data: Notifikasi Retensi ────────────────────────────────────────────
@@ -268,6 +283,17 @@ export const mockNotifikasiRetensi = [
     unit: "Departemen Makroprudensial",
     retensi: 2029,
     bulanSisa: 1,
+    tindakan: null,
+  },
+  // ── Simulation: SC belum lengkap → admin perlu menentukan tindakan ───────────
+  {
+    id: "n-006",
+    docId: "d-015",
+    title: "Laporan Bulanan Posisi Cadangan Devisa Maret 2025",
+    nomor: "005/MR.03.02/III/2025",
+    unit: "Departemen Moneter",
+    retensi: 2028, // hanya retensi aktif — inaktif & keterangan SC masih null
+    bulanSisa: 3,  // simulasi: 3 bulan sisa, perlu tindakan segera
     tindakan: null,
   },
 ];

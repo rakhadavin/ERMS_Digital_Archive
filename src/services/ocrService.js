@@ -13,55 +13,59 @@ export class OCRService {
     // For demo, return mock text based on file name or type
     // In real implementation, use Tesseract.js or other OCR library
     const mockTexts = {
-      'pdf': `SURAT KEPUTUSAN DIREKTUR
-Nomor: 017/SDM.02/VII/2024
-Tanggal: 15 Juli 2024
+      // PDF → valid MR code → classification FOUND
+      'pdf': `KEBIJAKAN MONETER
+Nomor: 001/MR.01.01.01/IV/2024
+Tanggal: 12 April 2024
 
-UNIT PENGOLAH: Divisi SDM
+UNIT PENGOLAH: Departemen Moneter
 
-PERIHAL: Penetapan Tim Evaluasi Kinerja Semester I Tahun 2024
+PERIHAL: Penetapan Arah Kebijakan Moneter Triwulan II Tahun 2024
 
 SIFAT: Biasa
 
-DESKRIPSI: Surat keputusan ini menetapkan susunan tim evaluasi kinerja pegawai untuk periode semester pertama tahun anggaran 2024.
+DESKRIPSI: Dokumen kebijakan moneter yang menetapkan arah dan instrumen kebijakan Bank Indonesia untuk triwulan kedua tahun 2024.
 
-KONTEKS: Evaluasi dilakukan berdasarkan KPI yang telah ditetapkan pada rapat kerja bulan Januari 2024.`,
+KONTEKS: Disusun berdasarkan hasil Rapat Dewan Gubernur April 2024 dengan mempertimbangkan dinamika inflasi global.`,
 
-      'jpg': `BERITA ACARA SERAH TERIMA
-Nomor: 007/UM.04/II/2024
+      // JPG → unrecognized code → classification NOT FOUND, manual required
+      'jpg': `NOTA DINAS
+Nomor: 007/IT.04/II/2024
 Tanggal: 20 Februari 2024
 
-UNIT: Divisi Umum
+UNIT: Divisi Teknologi Informasi
 
-PERIHAL: Serah Terima Aset IT
+PERIHAL: Pembaruan Infrastruktur Jaringan
 
 SIFAT: Biasa
 
-DESKRIPSI: Berita acara serah terima peralatan komputer dan jaringan dari vendor ke divisi IT.`,
+DESKRIPSI: Nota dinas mengenai rencana pembaruan infrastruktur jaringan internal kantor pusat.`,
 
-      'png': `KONTRAK KERJA SAMA
-Nomor: 003/HK.02/I/2024
+      // PNG → unrecognized code → classification NOT FOUND, manual required
+      'png': `SURAT EDARAN
+Nomor: 003/OPS.02/I/2024
 Tanggal: 5 Januari 2024
 
-UNIT: Divisi Hukum
+UNIT: Divisi Operasional
 
-PERIHAL: Kerja Sama dengan Vendor XYZ
+PERIHAL: Prosedur Operasional Standar Layanan Loket
 
-SIFAT: Rahasia
+SIFAT: Biasa
 
-DESKRIPSI: Perjanjian kontrak kerja sama pengembangan sistem informasi dengan PT XYZ.`,
+DESKRIPSI: Surat edaran penyempurnaan prosedur operasional standar layanan loket teller.`,
 
-      'docx': `LAPORAN AUDIT INTERNAL
-Nomor: 024/KU.02/I/2024
+      // DOCX → unrecognized code → classification NOT FOUND, manual required
+      'docx': `LAPORAN EVALUASI
+Nomor: 024/LOG.01/I/2024
 Tanggal: 15 Januari 2024
 
-UNIT: Divisi Audit
+UNIT: Divisi Logistik
 
-PERIHAL: Laporan Audit Q1 2024
+PERIHAL: Evaluasi Pengelolaan Aset Logistik Q4 2023
 
-SIFAT: Rahasia
+SIFAT: Biasa
 
-DESKRIPSI: Hasil audit internal triwulan pertama tahun 2024 menunjukkan kepatuhan 95%.`
+DESKRIPSI: Laporan evaluasi pengelolaan aset logistik sepanjang kuartal keempat tahun 2023.`
     };
 
     const fileType = file.name.split('.').pop().toLowerCase();

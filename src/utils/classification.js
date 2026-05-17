@@ -45,7 +45,9 @@ export function classifyDocument(nomorDokumen) {
       code_SC: subCategory.code_SC,
       name_SC: subCategory.name_SC,
       code_MC: subCategory.code_MC,
-      retention: subCategory.retention
+      masa_retensi_aktif: subCategory.masa_retensi_aktif,
+      masa_retensi_inaktif: subCategory.masa_retensi_inaktif,
+      keterangan: subCategory.keterangan,
     }
   }
 }

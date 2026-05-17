@@ -624,7 +624,7 @@ function PanelDokumenTerkait({ filterMC, filterSC, onClose }) {
                   </Button>
                   {(() => {
                     const sc = subCats.find(s => s.code_SC === selectedDoc.code_SC)
-                    return sc && sc.masa_retensi_aktif === null && sc.masa_retensi_inaktif === null && sc.keterangan === null
+                    return sc && (sc.masa_retensi_aktif === null || sc.masa_retensi_inaktif === null || sc.keterangan === null)
                   })() && (
                     <>
                       <Button
