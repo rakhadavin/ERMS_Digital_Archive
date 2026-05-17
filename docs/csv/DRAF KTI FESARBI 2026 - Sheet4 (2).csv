@@ -1,0 +1,27 @@
+Kode,Klasifikasi/Jenis Arsip,,,Keterangan
+,,Masa retensi Aktif,Masa Retensi Inaktif,
+MR.01,Ekonomi Moneter,,,
+MR.01.01,Kebijakan,,,
+MR.01.01.01,Kebijakan Moneter,5 tahun,25 tahun,Simpan Permanen
+MR.01.02,Penelitian dan Analisa,,,
+MR.01.02.01,Kertas Penelitian dan Analisa,2 tahun,3 tahun,Musnah
+MR.01.02.05,Working Paper,2 tahun,3 tahun,Musnah
+MR.01.03,Pidato dan Pernyataan Resmi,,,
+MR.01.03.02,Naskah Pidato Pimpinan,5 tahun,20 tahun,Simpan Permanen
+MR.02,Pengelolaan Moneter,,,
+MR.02.02,Instrumen Moneter,,,
+MR.02.02.01,Berkas Kebijakan Instrumen Moneter,5 tahun,5 tahun,Musnah
+MR.03,Pengelolaan Cadangan Devisa,,,
+MR.03.01,Kebijakan Cadangan Devisa,,,
+MR.03.01.01,Kebijakan Pengelolaan Cadangan Devisa,5 tahun,25 tahun,Simpan Permanen
+MP.01,Kebijakan Makroprudensial,,,
+MP.01.01,Kebijakan,,,
+MP.01.01.01,Kebijakan Makroprudensial,5 tahun,25 tahun,Simpan Permanen
+MP.01.02,Asesmen Stabilitas Sistem Keuangan,,,
+MP.01.02.01,Laporan Hasil Asesmen Stabilitas Sistem Keuangan,10 tahun,20 tahun,Simpan Permanen
+MP.01.02.06,Laporan Pengawasan Bank Sistemik,5 tahun,5 tahun,Musnah
+MP.01.06,Protokol Manajemen Krisis,,,
+MP.01.06.01,Berkas Protokol Manajemen Krisis,5 tahun,5 tahun,Musnah
+MP.02,Surveillance Sistem Keuangan,,,
+MP.02.01,Kebijakan Surveillance,,,
+MP.02.01.01,Kebijakan Surveillance Sistem Keuangan,5 tahun,25 tahun,Simpan Permanen
